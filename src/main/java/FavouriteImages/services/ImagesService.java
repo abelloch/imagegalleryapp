@@ -9,4 +9,16 @@ public class ImagesService {
     @Autowired
     IImagesRepository iImagesRepository;
 
-}
+    public boolean deleteImageById(long id) {
+        try {
+            iImagesRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+                    return false;
+                }
+
+            }
+        }
+
+
+
