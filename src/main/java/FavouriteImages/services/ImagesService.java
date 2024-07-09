@@ -17,15 +17,6 @@ public class ImagesService {
     @Autowired
     IImagesRepository iImagesRepository;
 
-    // Método para crear una nueva imagen
-    public ResponseEntity<String> createImage(Images image) {
-        try {
-            iImagesRepository.save(image);
-            return new ResponseEntity<>("Image created successfully", HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>("An error occurred while creating the image", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
     // Update by ID
     public ResponseEntity<String> updateImage(Images newImageDetails, int id) {

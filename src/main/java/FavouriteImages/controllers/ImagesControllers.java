@@ -23,17 +23,11 @@ public class ImagesControllers {
     private IImagesRepository imagesRepository;
 
 
-    // Endpoint para crear una nueva imagen
-    @PostMapping(path = "/images")
-    public ResponseEntity<String> createImage(@RequestBody Images image) {
-        return imagesService.createImage(image);
-    }
     // Endpoint para actualizar una nueva imagen por id
     @PutMapping(path = "/images/{id}")
     public ResponseEntity<String> updateImage(@PathVariable int id, @RequestBody Images newImageDetails) {
         return imagesService.updateImage(newImageDetails, id);
     }
-
 
 }
 
