@@ -26,7 +26,7 @@ public class ImagesService {
     }
 
     public Images getImageId(int id) {
-        Images image =  iImagesRepository.findById(id).orElseThrow();;
+        Images image = iImagesRepository.findById(id).orElseThrow();;
         return image;
     }
 }
