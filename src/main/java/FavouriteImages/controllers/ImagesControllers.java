@@ -3,7 +3,6 @@ package FavouriteImages.controllers;
 
 import FavouriteImages.services.ImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
