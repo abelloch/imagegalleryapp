@@ -72,7 +72,7 @@ class ImagesServiceTest {
     void delete_Images_By_Id(){
 
     when(iImagesRepository.findById(2)).thenReturn(Optional.of(imageGrandblue));
-    boolean result = imagesService.deleteimagesById(2);
+    boolean result = imagesService.deleteImagesById(2);
     verify(iImagesRepository).deleteById(2);
     assertTrue(result, "the elimination was successful");
 }

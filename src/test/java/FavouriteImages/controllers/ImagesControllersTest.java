@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -71,4 +72,20 @@ class ImagesControllersTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'id': 2, 'title': 'Granblue Fantasy', 'description': 'Game Granblue Fantasy Relink', 'url': 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/granblue-fantasy-relink-key-art.jpg'}"));
     }
-}
+    @Test
+    void deleteImagesById() throws Exception {
+        when(imagesService.deleteImagesById(2)).thenReturn(true);
+
+        mockMvc.perform(delete("/api/v1/images/2"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("image with id" + 2 + "was deleted"));
+
+        when(imagesService.deleteImagesById(2)).thenReturn(false);
+
+        mockMvc.perform(delete("/api/v1/images/2"))
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().string("Error, we have a problem to delete image with id 2"));
+    }
+    }
+
+
