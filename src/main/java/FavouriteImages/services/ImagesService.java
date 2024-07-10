@@ -15,7 +15,7 @@ public class ImagesService {
     public Images createImages (Images newimages){
         return iImagesRepository.save(newimages);
     }
-    public boolean deleteImageById(long id) {
+    public boolean deleteImagesById(int id) {
         try {
             iImagesRepository.deleteById(id);
             return true;

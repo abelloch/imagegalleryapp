@@ -4,6 +4,5 @@ import FavouriteImages.models.Images;
 import org.springframework.data.repository.CrudRepository;
 
 public interface IImagesRepository extends CrudRepository <Images, Integer> {
-
-    void deleteById(long id);
+    void deleteImagesById(long id);
 }
