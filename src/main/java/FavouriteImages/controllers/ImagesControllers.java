@@ -12,14 +12,10 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin ( origins = "*")
-
-public class   ImagesControllers {
+@CrossOrigin(origins = "*")
+public class ImagesControllers {
     @Autowired
     ImagesService imagesService;
-
-
-
 
     @PostMapping(path = "/images")
     public Images createImages(@RequestBody Images newImages){
@@ -40,10 +36,14 @@ public class   ImagesControllers {
     public String deleteImagesById(@PathVariable int id) {
     boolean ok = imagesService.deleteImagesById(id);
     if (ok) {
-        return "image with id" + id + "as deleted";
+      return "image with id" + id + "as deleted";
     } else {
-        return "Error, we have a problem to deleted image" + id;
-        }
+      return "Error, we have a problem to deleted image" + id;
+    }
+}
+    @GetMapping(path = "")
+    public ArrayList<Images> getAllImages() {
+        return imagesService.getAllImages();
     }
 
     // Endpoint para actualizar una nueva imagen por id
