@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +15,7 @@ import java.util.Optional;
 
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class ImagesServiceTest {
@@ -68,11 +67,15 @@ class ImagesServiceTest {
         assertEquals("Game Granblue Fantasy Relink", imageId.getDescription());
     }
     @Test
-    void delete_Images_By_Id(){
+    void createImages() {
+        when(iImagesRepository.save(any(Images.class))).thenReturn(imageGrandblue);
+        Images newImages = imagesService.createImages(imageGrandblue);
 
-    when(iImagesRepository.findById(2)).thenReturn(Optional.of(imageGrandblue));
-    boolean result = imagesService.deleteImagesById(2);
-    verify(iImagesRepository).deleteById(2);
-    assertTrue(result, "the elimination was successful");
-}
+        assertNotNull(newImages);
+        assertEquals(2,newImages.getId());
+        assertEquals("Granblue Fantasy", newImages.getTitle());
+        assertEquals("Game Granblue Fantasy Relink", newImages.getDescription());
+        assertEquals("https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/granblue-fantasy-relink-key-art.jpg", newImages.getUrl());
+    }
+
 }
