@@ -2,10 +2,12 @@ package FavouriteImages.controllers;
 
 
 import FavouriteImages.models.Images;
+import FavouriteImages.repositories.IImagesRepository;
+import FavouriteImages.models.Images;
 import FavouriteImages.services.ImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.Optional;
 import java.util.ArrayList;
 
 @RestController
@@ -20,8 +22,18 @@ public class ImagesControllers {
         return imagesService.createImages(newImages);
     }
 
-  @DeleteMapping(path = "images/{id}")
-  public String deleteImagesById(@PathVariable int id) {
+    @GetMapping(path = "")
+    public ArrayList<Images> getAllImages() {
+        return imagesService.getAllImages();
+    }
+
+    @GetMapping(path = "/images/{id}")
+    public Images getImageId(@PathVariable int id) {
+        return imagesService.getImageId(id);
+        }
+
+    @DeleteMapping(path = "/{id}")
+    public String deleteImagesById(@PathVariable int id) {
     boolean ok = imagesService.deleteImagesById(id);
     if (ok) {
       return "image with id" + id + "as deleted";
@@ -34,9 +46,9 @@ public class ImagesControllers {
         return imagesService.getAllImages();
     }
 
-    @GetMapping(path = "/images/{id}")
-    public Images getImageId(@PathVariable int id) {
-        return imagesService.getImageId(id);
-        }
-
+    // Endpoint para actualizar una nueva imagen por id
+    @PutMapping(path = "/images/{id}")
+    public void updateImage (@RequestBody Images images, @PathVariable int id) {
+        imagesService.updateImage(images, id);
+    }
 }
