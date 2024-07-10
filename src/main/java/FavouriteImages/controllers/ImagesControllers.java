@@ -43,7 +43,6 @@ public class ImagesControllers {
         }
 
 
-    // Endpoint para actualizar una nueva imagen por id
     @PutMapping(path = "/images/{id}")
     public void updateImage (@RequestBody Images images, @PathVariable int id) {
         imagesService.updateImage(images, id);
