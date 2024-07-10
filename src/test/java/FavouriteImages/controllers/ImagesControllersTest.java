@@ -8,14 +8,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -71,4 +74,14 @@ class ImagesControllersTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'id': 2, 'title': 'Granblue Fantasy', 'description': 'Game Granblue Fantasy Relink', 'url': 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/granblue-fantasy-relink-key-art.jpg'}"));
     }
-}
+    @Test
+    void createImage() throws Exception {
+        when(imagesService.createImages(any(Images.class))).thenReturn(imageGrandblue);
+        String imageJson = "{\"title\": \"Granblue Fantasy\", \"description\": \"Game Granblue Fantasy Relink\", \"url\": \"https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/granblue-fantasy-relink-key-art.jpg\"}";
+        mockMvc.perform(post("/api/v1/images")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(imageJson))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"id\": 2, \"title\": \"Granblue Fantasy\", \"description\": \"Game Granblue Fantasy Relink\", \"url\": \"https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/granblue-fantasy-relink-key-art.jpg\"}"));
+            }
+    }
