@@ -46,7 +46,6 @@ public class ImagesControllers {
         return imagesService.getAllImages();
     }
 
-    // Endpoint para actualizar una nueva imagen por id
     @PutMapping(path = "/images/{id}")
     public void updateImage (@RequestBody Images images, @PathVariable int id) {
         imagesService.updateImage(images, id);
