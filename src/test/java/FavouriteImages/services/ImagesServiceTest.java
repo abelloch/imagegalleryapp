@@ -37,7 +37,7 @@ class ImagesServiceTest {
         imagePersona.setId(1);
         imagePersona.setTitle("Persona");
         imagePersona.setDescription("Game persona 4");
-        imagePersona.setDescription("https://miro.medium.com/v2/resize:fit:1400/1*cz97DqG8yiPh2G2k3lz-rQ.jpeg");
+        imagePersona.setUrl("https://miro.medium.com/v2/resize:fit:1400/1*cz97DqG8yiPh2G2k3lz-rQ.jpeg");
 
         imageGrandblue = new Images();
         imageGrandblue.setId(2);
@@ -65,4 +65,16 @@ class ImagesServiceTest {
         assertEquals("Granblue Fantasy", imageId.getTitle());
         assertEquals("Game Granblue Fantasy Relink", imageId.getDescription());
     }
+    @Test
+    void createImages() {
+        when(iImagesRepository.save(any(Images.class))).thenReturn(imageGrandblue);
+        Images newImages = imagesService.createImages(imageGrandblue);
+
+        assertNotNull(newImages);
+        assertEquals(2,newImages.getId());
+        assertEquals("Granblue Fantasy", newImages.getTitle());
+        assertEquals("Game Granblue Fantasy Relink", newImages.getDescription());
+        assertEquals("https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/granblue-fantasy-relink-key-art.jpg", newImages.getUrl());
+    }
+
 }

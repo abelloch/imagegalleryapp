@@ -20,7 +20,7 @@ public class ImagesControllers {
         return imagesService.createImages(newImages);
     }
 
-  @DeleteMapping(path = "/{id}")
+  @DeleteMapping(path = "images/{id}")
   public String deleteImagesById(@PathVariable int id) {
     boolean ok = imagesService.deleteImagesById(id);
     if (ok) {
