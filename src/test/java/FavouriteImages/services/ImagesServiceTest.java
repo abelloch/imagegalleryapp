@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class ImagesServiceTest {
@@ -37,7 +39,7 @@ class ImagesServiceTest {
         imagePersona.setId(1);
         imagePersona.setTitle("Persona");
         imagePersona.setDescription("Game persona 4");
-        imagePersona.setDescription("https://miro.medium.com/v2/resize:fit:1400/1*cz97DqG8yiPh2G2k3lz-rQ.jpeg");
+        imagePersona.setUrl("https://miro.medium.com/v2/resize:fit:1400/1*cz97DqG8yiPh2G2k3lz-rQ.jpeg");
 
         imageGrandblue = new Images();
         imageGrandblue.setId(2);
@@ -65,4 +67,12 @@ class ImagesServiceTest {
         assertEquals("Granblue Fantasy", imageId.getTitle());
         assertEquals("Game Granblue Fantasy Relink", imageId.getDescription());
     }
+    @Test
+    void delete_Images_By_Id(){
+
+    when(iImagesRepository.findById(2)).thenReturn(Optional.of(imageGrandblue));
+    boolean result = imagesService.deleteImagesById(2);
+    verify(iImagesRepository).deleteById(2);
+    assertTrue(result, "the elimination was successful");
+}
 }
