@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Service
 public class ImagesService {
+
     @Autowired
     IImagesRepository iImagesRepository;
 
@@ -34,7 +35,6 @@ public class ImagesService {
         Images image = iImagesRepository.findById(id).orElseThrow();;
         return image;
     }
-}
 
     // Update by ID
     public void updateImage(Images images, Integer id) {
