@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class ImagesServiceTest {
@@ -66,6 +68,14 @@ class ImagesServiceTest {
         assertEquals("Granblue Fantasy", imageId.getTitle());
         assertEquals("Game Granblue Fantasy Relink", imageId.getDescription());
     }
+    @Test
+    void delete_Images_By_Id(){
+
+    when(iImagesRepository.findById(2)).thenReturn(Optional.of(imageGrandblue));
+    boolean result = imagesService.deleteImageById(2);
+    verify(iImagesRepository).deleteById(2);
+    assertTrue(result, "the elimination was successful");
+}
     @Test
     void createImages() {
         when(iImagesRepository.save(any(Images.class))).thenReturn(imageGrandblue);
