@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +17,9 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
+//@SpringBootTest
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -87,5 +90,21 @@ class ImagesServiceTest {
         assertEquals("Game Granblue Fantasy Relink", newImages.getDescription());
         assertEquals("https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/granblue-fantasy-relink-key-art.jpg", newImages.getUrl());
     }
+
+    @Test
+    void updateImage() {
+        when(iImagesRepository.save(any(Images.class))).thenReturn(imageGrandblue);
+
+        Images imageToUpdate = new Images();
+        imageToUpdate.setTitle("Old Title");
+        imageToUpdate.setDescription("Old Description");
+
+
+        imagesService.updateImage(imageToUpdate, 2);
+        assertEquals(2, imageToUpdate.getId());
+        verify(iImagesRepository, times(1)).save(imageToUpdate);
+    }
+
+
 
 }
