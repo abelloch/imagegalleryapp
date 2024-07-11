@@ -3,10 +3,12 @@ package FavouriteImages.services;
 import FavouriteImages.models.Images;
 import FavouriteImages.repositories.IImagesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 
+import java.util.Collections;
 import java.util.Optional;
 
 @Service
@@ -36,12 +38,16 @@ public class ImagesService {
         return image;
     }
 
-    // Update by ID
     public void updateImage(Images images, Integer id) {
         images.setId(id);
         iImagesRepository.save(images);
     }
-
+           public Images updateFavorite(int id, boolean favorite) {
+               return iImagesRepository.findById(id).map(image -> {
+                   image.setFavorite(favorite);
+                   return iImagesRepository.save(image);
+               }).orElseThrow(() -> new IllegalArgumentException("Image not found with id " + id));
+           }
 }
 
 

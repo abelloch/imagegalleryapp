@@ -24,4 +24,7 @@ public class Images {
 
         @Column(name = "Description")
         private String description;
+
+        @Column(name = "Favorite")
+        private boolean favorite;
 }
