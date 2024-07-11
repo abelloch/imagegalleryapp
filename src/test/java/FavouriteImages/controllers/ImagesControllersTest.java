@@ -2,6 +2,7 @@ package FavouriteImages.controllers;
 
 import FavouriteImages.models.Images;
 import FavouriteImages.services.ImagesService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,9 +17,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -85,3 +88,21 @@ class ImagesControllersTest {
                 .andExpect(content().json("{\"id\": 2, \"title\": \"Granblue Fantasy\", \"description\": \"Game Granblue Fantasy Relink\", \"url\": \"https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/granblue-fantasy-relink-key-art.jpg\"}"));
             }
     }
+
+    @Test
+    void updateImage() throws Exception {
+        doNothing().when(imagesService).updateImage(imageGrandblue, 2);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String imageJson = objectMapper.writeValueAsString(imageGrandblue);
+
+        mockMvc.perform(put("/api/v1/images/2")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(imageJson))
+                .andExpect(status().isOk());
+    }
+
+
+
+
+}
