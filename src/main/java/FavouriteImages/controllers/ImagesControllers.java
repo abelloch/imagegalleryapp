@@ -40,9 +40,8 @@ public class ImagesControllers {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error, we have a problem to delete image with id " + id);
         }
-        }
-
-
+    }
+    
     @PutMapping(path = "/images/{id}")
     public void updateImage (@RequestBody Images images, @PathVariable int id) {
         imagesService.updateImage(images, id);

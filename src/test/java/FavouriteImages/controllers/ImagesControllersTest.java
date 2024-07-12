@@ -78,6 +78,7 @@ class ImagesControllersTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'id': 2, 'title': 'Granblue Fantasy', 'description': 'Game Granblue Fantasy Relink', 'url': 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/granblue-fantasy-relink-key-art.jpg'}"));
     }
+
     @Test
     void deleteImagesById() throws Exception {
         when(imagesService.deleteImagesById(2)).thenReturn(true);
@@ -93,8 +94,6 @@ class ImagesControllersTest {
                 .andExpect(content().string("Error, we have a problem to delete image with id 2"));
     }
 
-
-
     @Test
     void createImage() throws Exception {
         when(imagesService.createImages(any(Images.class))).thenReturn(imageGrandblue);
@@ -104,7 +103,6 @@ class ImagesControllersTest {
                         .content(imageJson))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"id\": 2, \"title\": \"Granblue Fantasy\", \"description\": \"Game Granblue Fantasy Relink\", \"url\": \"https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/granblue-fantasy-relink-key-art.jpg\"}"));
-            }
     }
 
     @Test
@@ -119,8 +117,4 @@ class ImagesControllersTest {
                         .content(imageJson))
                 .andExpect(status().isOk());
     }
-
-
-
-
 }

@@ -36,7 +36,6 @@ public class ImagesService {
         return image;
     }
 
-    // Update by ID
     public void updateImage(Images images, Integer id) {
         images.setId(id);
         iImagesRepository.save(images);
