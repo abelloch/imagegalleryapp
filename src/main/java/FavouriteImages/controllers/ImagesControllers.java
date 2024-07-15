@@ -3,11 +3,13 @@ package FavouriteImages.controllers;
 import FavouriteImages.models.Images;
 import FavouriteImages.services.ImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -46,18 +48,14 @@ public class ImagesControllers {
   }
 
   @PutMapping(path = "/images/{id}/favorite")
-  public ResponseEntity<String> updateFavorite(@PathVariable int id, @RequestBody Map<String, Boolean> request) {
-      try {
-          Boolean favorite = request.get("favorite");
-          if (favorite == null) {
-              return ResponseEntity.badRequest().body("Missing 'favorite' field in request body");
-          }
+  public ResponseEntity<?> updateFavorite(@PathVariable int id, @RequestBody Boolean favorite) {
+    try {
       Images favoriteImages = imagesService.updateFavorite(id, favorite);
-      return ResponseEntity.ok(id + "is favorite");
-    } catch (IllegalArgumentException e) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+      return ResponseEntity.ok("Image favorite status updated successfully");
+    } catch (NoSuchElementException e) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Image not found");
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
     }
   }
 }

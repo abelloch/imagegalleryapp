@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 import java.util.Collections;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -44,13 +45,11 @@ public class ImagesService {
   }
 
   public Images updateFavorite(int id, boolean favorite) {
-    return iImagesRepository
-        .findById(id)
-        .map(
-            image -> {
-              image.setFavorite(favorite);
-              return iImagesRepository.save(image);
-            })
-        .orElseThrow(() -> new IllegalArgumentException("Image not found with id " + id));
+    Images image =
+        iImagesRepository
+            .findById(id)
+            .orElseThrow(() -> new NoSuchElementException("Image not found with id " + id));
+    image.setFavorite(favorite);
+    return iImagesRepository.save(image);
   }
 }
