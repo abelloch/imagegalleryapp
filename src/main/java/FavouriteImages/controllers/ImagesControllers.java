@@ -31,7 +31,7 @@ public class ImagesControllers {
         return imagesService.getImageId(id);
         }
 
-    @DeleteMapping(path = "images/{id}")
+    @DeleteMapping(path = "/images/{id}")
     public ResponseEntity<String> deleteImagesById(@PathVariable int id) {
         boolean ok = imagesService.deleteImagesById(id);
         if (ok) {
