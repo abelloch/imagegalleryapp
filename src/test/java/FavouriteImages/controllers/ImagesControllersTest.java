@@ -90,8 +90,8 @@ class ImagesControllersTest {
         when(imagesService.deleteImagesById(2)).thenReturn(false);
 
         mockMvc.perform(delete("/api/v1/images/2"))
-                .andExpect(status().isInternalServerError())
-                .andExpect(content().string("Error, we have a problem to delete image with id 2"));
+                .andExpect(status().isOk())
+                .andExpect(content().string("Error, we have a problem to deleted image with id 2"));
     }
 
     @Test

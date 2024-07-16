@@ -3,6 +3,8 @@ package FavouriteImages.controllers;
 import FavouriteImages.models.Images;
 import FavouriteImages.services.ImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Map;
@@ -33,9 +35,9 @@ public class ImagesControllers {
   public String deleteImagesById(@PathVariable int id) {
     boolean ok = imagesService.deleteImagesById(id);
     if (ok) {
-      return "image with id" + id + "as deleted";
+      return "image with id" + id + "was deleted";
     } else {
-      return "Error, we have a problem to deleted image" + id;
+      return "Error, we have a problem to deleted image with id " + id;
     }
   }
 
@@ -44,15 +46,14 @@ public class ImagesControllers {
     imagesService.updateImage(images, id);
   }
 
-  @PutMapping(path = "/images/{id}/favorite")
-  public ResponseEntity<?> updateFavorite(@PathVariable int id, @RequestBody Boolean favorite) {
+  @PutMapping(value = "/images/{id}/favorite")
+  public ResponseEntity<Images> updateFavorite(@PathVariable int id) {
     try {
-      Images favoriteImages = imagesService.updateFavorite(id, favorite);
-      return ResponseEntity.ok("Image favorite status updated successfully");
+      return ResponseEntity.ok(imagesService.updateFavorite(id));
     } catch (NoSuchElementException e) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Image not found");
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }
 }

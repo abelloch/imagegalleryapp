@@ -43,12 +43,12 @@ public class ImagesService {
     iImagesRepository.save(images);
   }
 
-  public Images updateFavorite(int id, boolean favorite) {
+  public Images updateFavorite(int id) {
     Images image =
         iImagesRepository
             .findById(id)
             .orElseThrow(() -> new NoSuchElementException("Image not found with id " + id));
-    image.setFavorite(favorite);
+    image.setFavorite(!image.isFavorite());
     return iImagesRepository.save(image);
   }
 }
