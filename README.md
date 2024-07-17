@@ -19,7 +19,6 @@ Create a personalized API whose allowing to complete the CRUD process using the 
 •	Java
 •	Spring Boot
 •	MySQL
-•	JUnit
 
 
 Good Practices : We have followed object-oriented programming principles and SOLID best practices to ensure that our code is robust, maintainable and extensible.
@@ -68,11 +67,10 @@ Contributions are welcome!!!. Please open an issue or pull request to discuss an
 
 # Developer Team : 
 
-•	Hilmar Hernandez - GitHub : https://github.com/Hilmar09
-•	Asdrubal Bello - GitHub 
-•	Maksym Hryshchuk - GitHub : https://github.com/Ruji7576
-•	Eva Martínez - GitHub : https://github.com/EvaMartinez94
+•	Hilmar Hernandez - GitHub : https://github.com/Hilmar09 <br>
+•	Asdrubal Bello - GitHub <br>
+•	Maksym Hryshchuk - GitHub : https://github.com/Ruji7576 <br>
+•	Eva Martínez - GitHub : https://github.com/EvaMartinez94 <br>
 
 # Checkout our video Demo!! :
-
-https://drive.google.com/file/d/16IPlLf2it2LZBbqejzsALRPrSUf4T8Kv/view
+https://drive.google.com/file/d/19ZDUckMVHLlJo0FTkIfUMaRGBQyylTOZ/view
