@@ -65,6 +65,9 @@ mvn spring-boot:
 
 #Contributions
 Contributions are welcome!!!. Please open an issue or pull request to discuss any changes you would like to make.
+
+# Developer Team : 
+
 •	Hilmar Hernandez - GitHub
 •	Asdrubal Bello - GitHub
 •	Maksym Hryshchuk - GitHub
