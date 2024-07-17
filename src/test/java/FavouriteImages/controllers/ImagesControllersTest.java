@@ -25,7 +25,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
 class ImagesControllersTest {
 
     @Mock
@@ -54,7 +53,7 @@ class ImagesControllersTest {
 
         imageGrandblue = new Images();
         imageGrandblue.setId(2);
-        imageGrandblue.setTitle("Grandblue Fantasy");
+        imageGrandblue.setTitle("Granblue Fantasy");
         imageGrandblue.setDescription("Game Granblue Fantasy Relink");
         imageGrandblue.setUrl("https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/granblue-fantasy-relink-key-art.jpg");
         imageGrandblue.setFavorite(false);
@@ -125,7 +124,7 @@ class ImagesControllersTest {
         mockMvc.perform(put("/api/v1/images/2/favorite"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(2)))
-                .andExpect(jsonPath("$.title", is("Grandblue Fantasy")))
+                .andExpect(jsonPath("$.title", is("Granblue Fantasy")))
                 .andExpect(jsonPath("$.favorite",is(false)));
         verify(imagesService).updateFavorite(2);
     }
