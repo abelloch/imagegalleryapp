@@ -1,0 +1,17 @@
+public ResponseEntity<String> updateImage(Images newImageDetails, int id) {
+        try {
+            Optional<Images> optionalImage = iImagesRepository.findById(id);
+            if (optionalImage.isPresent()) {
+                Images existingImage = optionalImage.get();
+                existingImage.setTitle(newImageDetails.getTitle());
+                existingImage.setUrl(newImageDetails.getUrl());
+                existingImage.setDescription(newImageDetails.getDescription());
+                iImagesRepository.save(existingImage);
+                return new ResponseEntity<>("Image updated successfully", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Image not found", HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>("An error occurred while updating the image", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
