@@ -12,19 +12,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import static org.hamcrest.Matchers.is;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 class ImagesControllersTest {
@@ -51,12 +50,14 @@ class ImagesControllersTest {
         imagePersona.setTitle("Persona");
         imagePersona.setDescription("Game persona 4");
         imagePersona.setUrl("https://miro.medium.com/v2/resize:fit:1400/1*cz97DqG8yiPh2G2k3lz-rQ.jpeg");
+        imagePersona.setFavorite(false);
 
         imageGrandblue = new Images();
         imageGrandblue.setId(2);
-        imageGrandblue.setTitle("Granblue Fantasy");
+        imageGrandblue.setTitle("Grandblue Fantasy");
         imageGrandblue.setDescription("Game Granblue Fantasy Relink");
         imageGrandblue.setUrl("https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/granblue-fantasy-relink-key-art.jpg");
+        imageGrandblue.setFavorite(false);
 
         imagesList = new ArrayList<>(Arrays.asList(imagePersona, imageGrandblue));
     }
@@ -116,5 +117,16 @@ class ImagesControllersTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(imageJson))
                 .andExpect(status().isOk());
+    }
+    @Test
+    void updateFavoriteImage() throws Exception {
+        when(imagesService.updateFavorite(2)).thenReturn(imageGrandblue);
+
+        mockMvc.perform(put("/api/v1/images/2/favorite"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(2)))
+                .andExpect(jsonPath("$.title", is("Grandblue Fantasy")))
+                .andExpect(jsonPath("$.favorite",is(false)));
+        verify(imagesService).updateFavorite(2);
     }
 }
