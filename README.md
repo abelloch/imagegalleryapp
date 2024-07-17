@@ -61,7 +61,9 @@ git clone (https://github.com/abelloch/imagegalleryapp.git)
 mvn clean install
 mvn spring-boot:
 4.	The application will be available at http://localhost:8080.
-Contributions
+
+
+#Contributions
 Contributions are welcome!!!. Please open an issue or pull request to discuss any changes you would like to make.
 •	Hilmar Hernandez - GitHub
 •	Asdrubal Bello - GitHub
