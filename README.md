@@ -44,7 +44,7 @@ Good Practices : We have followed object-oriented programming principles and SOL
 •	Body: { "title": "new title", "description": "new description", "published": true/false }
 
 # TDD:
-Functionalities were tested using Junit & Mockito.
+Functionalities were tested using Mockito.
 
 Installation and Execution
 Previous requirements
@@ -68,10 +68,10 @@ Contributions are welcome!!!. Please open an issue or pull request to discuss an
 
 # Developer Team : 
 
-•	Hilmar Hernandez - GitHub
-•	Asdrubal Bello - GitHub
-•	Maksym Hryshchuk - GitHub
-•	Eva Martínez - GitHub
+•	Hilmar Hernandez - GitHub : https://github.com/Hilmar09
+•	Asdrubal Bello - GitHub 
+•	Maksym Hryshchuk - GitHub : https://github.com/Ruji7576
+•	Eva Martínez - GitHub : https://github.com/EvaMartinez94
 
 # Checkout our video Demo!! :
 
