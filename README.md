@@ -1,6 +1,6 @@
 # Pixel Gallery 
 
-# Project Context
+# Project Context :
 This project was developed as a result of a client's request for an image management system that allows them to manage and store their favorite images.
 
 The webpage will allow users to: 
@@ -22,12 +22,12 @@ Create a personalized API whose allowing to complete the CRUD process using the 
 •	JUnit
 
 
-Good Practices
-We have followed object-oriented programming principles and SOLID best practices to ensure that our code is robust, maintainable and extensible.
+Good Practices : We have followed object-oriented programming principles and SOLID best practices to ensure that our code is robust, maintainable and extensible.
 
 
 
-#  API Features
+#  API Features:
+
 1.	See Images all of them or sear by ID
 •	Endpoint: GET /tutorials
 •	Description: Allows you to view all the tutorials available in the database.
@@ -43,7 +43,7 @@ We have followed object-oriented programming principles and SOLID best practices
 •	Description: Allows you to update an existing tutorial.
 •	Body: { "title": "new title", "description": "new description", "published": true/false }
 
-# TDD
+# TDD:
 All C.R.U.D functionalities were tested using Junit & Mockito.
 
 Installation and Execution
@@ -51,7 +51,8 @@ Previous requirements
 •	Java 11 or higher -Maven -MySQL
 
 
-# Instructions
+# Instructions:
+
 1.	Clone the repository:
 git clone (https://github.com/abelloch/imagegalleryapp.git)
 2.	Create a  local database called tutorial_db.
