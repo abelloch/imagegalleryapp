@@ -44,7 +44,7 @@ Good Practices : We have followed object-oriented programming principles and SOL
 •	Body: { "title": "new title", "description": "new description", "published": true/false }
 
 # TDD:
-All C.R.U.D functionalities were tested using Junit & Mockito.
+Functionalities were tested using Junit & Mockito.
 
 Installation and Execution
 Previous requirements
